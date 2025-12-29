@@ -1,0 +1,67 @@
+@use '../../css/common.scss' as *;
+
+.section {
+    height: $height100;
+    background-color: $primary-color;
+    color: $public-color1;
+}
+
+
+.layout {
+    height: $height100;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    .sider {
+        background-color: $primary-color;
+
+        .global-ul {
+            height: calc($height100 - $app-footer-height);
+            background-color: $primary-color9;
+            overflow-y: overlay;
+
+            /**
+            * 设置菜单展开后的样式
+            * 注意：修改了Menu组件的第二级标签，审查出来的类为： 
+            * class="ant-menu ant-menu-sub ant-menu-inline"
+            * 但是在改写的时候需要将名称连接起来，中间无空格，否则无法修改样式
+            */ 
+            .ant-menu.ant-menu-sub.ant-menu-inline {
+                background-color: $primary-color10;
+            }
+        }
+
+
+
+
+        .trigger {
+            height: $app-footer-height;
+            padding: 0 $padding-8;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-size: $font-size-20;
+            cursor: pointer;
+            transition: color 0.3s;
+            color: $public-color1;
+
+            &:hover {
+                color: $color-main-alert;
+            }
+        }
+    }
+}
+
+
+
+.layout .active .ant-menu-submenu-title {
+    color: red;
+}
+
+
+.selected {
+    background-color: $Secondary-color10 !important;
+    color: $Attention-color !important;
+    border-left: $border-2 solid $Secondary-color !important;
+}

@@ -1,0 +1,76 @@
+@use '../../css/common.scss' as *;
+
+.submitButton {
+    width: $width100;
+    height: $height-48;
+    background-color: $primary-color;
+    color: $font-color1;
+    border: none;
+    border-radius: $border-8;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover {
+        background-color: $primary-color10;
+    }
+    &:disabled {
+        background-color: $button-disable-color;
+        cursor: not-allowed;
+    }
+    &:focus {
+        outline: none;
+    }
+    font-size: $font-size-16;
+}
+
+.bgView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $height100;
+    background-color: $public-color1;
+}
+
+.bgContent {
+    padding: $padding-32;
+    border-radius: $border-8;
+    background-color: $Secondary-color2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: $width-320;
+    max-width: 100%;
+}
+
+.title {
+    color: $primary-color;
+    font-size: $font-size-24;
+    margin-bottom: $margin-24;
+    text-align: center;
+}
+
+.errMsg {
+    color: $Caution-color;
+    margin-bottom: $margin-16;
+    text-align: center;
+}
+
+.userName, .password {
+    margin-bottom: $margin-16;
+
+    label {
+        display: block;
+        margin-bottom: $margin-8;
+    }
+
+    input {
+        width: $width100;
+        padding: $padding-8;
+        border: $border-1 solid $border-division-line-color; 
+        border-radius: $border-4;
+        font-size: $font-size-16;
+    }
+
+    &:focus-within {
+        input {
+            border-color: $primary-color;
+        }
+    }
+}

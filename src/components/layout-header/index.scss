@@ -1,0 +1,128 @@
+@use '../../css/common.scss' as *;
+
+.app-header {
+    display: flex;
+    flex-direction: row;
+    width: $app-header-width;
+    height: $app-header-height;
+    background: $primary-color;
+    z-index: 100;
+
+    // 漸變色
+    border-bottom: 4px solid;
+    border-image-source: linear-gradient(270deg, #45a2cd 0%, #9ac258 100%);
+    border-image-slice: 1;
+
+
+    .header-left {
+        position: relative;
+        display: flex;
+        width: $sider-width;
+        height: $height100;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: $width-120;
+        }
+
+        .driver {
+            position: absolute;
+            width: 1px;
+            height: $height-32;
+            background-color: $primary-color15;
+            right: 0;
+        }
+    }
+
+
+    .header-right {
+        display: flex;
+        flex: 1;
+        height: $height100;
+        justify-content: space-between;
+        align-items: center;
+        font-size: $font-size-16;
+        color: $font-color1;
+
+        .left {
+            margin-left: $margin-16;
+        }
+
+        .right {
+            display: flex;
+            list-style: none;
+            padding: $padding-0;
+            align-items: center;
+
+            li {
+                margin-right: $margin-8;
+            }
+
+            .logout {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+
+// 设置语言选择器样式
+// :where(.lanSelect) {
+//     font-size: $font-size-16;
+
+//     .ant-select-content {
+//         background-color: transparent !important;
+//         border: none !important;
+//         font-size: $font-size-16;
+//         color: $public-color1;
+//     }
+
+//     .anticon,
+//     .anticon-down {
+//         font-size: $font-size-16;
+//         color: $public-color1;
+//     }
+// }
+
+.lanSelect {
+    .ant-select-content {
+        background-color: transparent !important;
+        border: none !important;
+        font-size: $font-size-16;
+        color: $public-color1;
+    }
+
+    .anticon,
+    .anticon-down {
+        font-size: $font-size-16;
+        color: $public-color1;
+    }
+}
+
+
+
+.mobile-header {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-size-16;
+    color: $font-color1;
+
+
+    .trigger {
+        height: $app-footer-height;
+        padding: 0 $padding-8;
+        position: absolute;
+        right: 0;
+        font-size: $font-size-20;
+        cursor: pointer;
+        transition: color 0.3s;
+        color: $public-color1;
+        display: flex;
+        // &:hover {
+        //     color: $color-main-alert;
+        // }
+    }
+}

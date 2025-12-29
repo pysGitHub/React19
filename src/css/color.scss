@@ -1,0 +1,113 @@
+// Ng Zorro them
+$color-zorro-main-wistron-blue: #3D91B2; //Primary 4
+
+// Main
+$color-main-dark: #000;
+$color-main-dark-lighter: #333;
+$color-main-dark-lightest: #B3B3B3;
+$color-main-gray-darker: #606060;
+$color-main-gray: #A9A9A9;
+$color-main-gray-lighter: #D7D7D7;
+$color-main-gray-lightest: #e6e6e6;
+$color-main-white: #FFF;
+
+$color-main-blue: $color-zorro-main-wistron-blue;
+$color-main-blue-lighter: #6EACC5; //Primary 3
+
+// Alert
+$color-main-alert-lighter: #FF6961; //Alert 1
+$color-main-alert: #FF4339; //Alert 2
+
+// Status tag
+$color-status-tag-alert: #EB2F96;
+$color-status-tag-pass: #64A91A;
+
+// For "table-action" area only
+$color-table-action-blue-darker: #9ED5FF;
+$color-table-action-blue: #1890FF;
+$color-table-action-blue-lighter: #178fffb3;
+$color-table-action-blue-lightest: #E6F7FF;
+
+
+// .......................
+
+
+// Public Color
+$public-color1: #ffffff;
+$public-color2: #000000;
+
+// Primary Color
+$primary-color: #0d759f;
+$primary-color1: $public-color1;
+$primary-color2: #e7f1f5;
+$primary-color3: #cfe3ec;
+$primary-color4: #bbd6e2;
+$primary-color5: #9ec8d9;
+$primary-color6: #6eacc5;
+$primary-color7: #3d91b2;
+$primary-color8: $primary-color1;
+$primary-color9: #0a5e7f;
+$primary-color10: #08465f;
+$primary-color11: #052f40;
+$primary-color12: #042330;
+$primary-color13: #031720;
+$primary-color14: #010c10;
+$primary-color15: #ffffff80;
+
+
+// Secondary Color
+$Secondary-color: #9ac258;
+$Secondary-color1: $public-color1;
+$Secondary-color2: #f5f9ee;
+$Secondary-color3: #ebf3de;
+$Secondary-color4: #e1edcd;
+$Secondary-color5: #d7e7bc;
+$Secondary-color6: #c2da9b;
+$Secondary-color7: #aece79;
+$Secondary-color8: $Secondary-color;
+$Secondary-color9: #789846;
+$Secondary-color10: #5c7435;
+$Secondary-color11: #3e4e23;
+$Secondary-color12: #2e3a1a;
+$Secondary-color13: #1f2712;
+$Secondary-color14: #0f1309;
+$Secondary-color15: $public-color2;
+
+// Safe / Success Color
+$Success-color: #7dd321;
+$Success-color1: #97dc4d;
+$Success-color2: $Success-color;
+$Success-color3: #64a91a;
+
+// Attention Color
+$Attention-color: #faad14;
+$Attention-color1: #f7e93a;
+$Attention-color2: $Attention-color;
+$Attention-color3: #d09600;
+
+// Fail / Caution Color
+$Caution-color: #ff4339;
+$Caution-color1: #ff6961;
+$Caution-color2: $Caution-color;
+$Caution-color3: #cc362e;
+
+// Extra State Color
+$Extra-color: #a8fbff;
+$Extra-color1: #b9fcff;
+$Extra-color2: $Extra-color;
+$Extra-color3: #86dee2;
+
+
+
+//Font Color
+$font-color1: rgba(255, 255, 255, 1);
+$font-color2: rgba(255, 255, 255, 0.9);
+$font-color3: rgba(255, 255, 255, 0.7);
+$font-color4: rgba(255, 255, 255, 0.5);
+$font-color5: rgba(255, 255, 255, 0.3);
+$font-color6: rgba(255, 255, 255, 0.1);
+$font-color7: rgba(255, 255, 255, 0.05);
+$button-disable-color: rgba(0, 0, 0, 0.25);
+
+// Border Color
+$border-division-line-color: #00000026;

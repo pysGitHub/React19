@@ -1,0 +1,80 @@
+@forward './color.scss';
+@use './color.scss' as *;
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// height width
+$height100: 100%;
+$height-10: 10px;
+$height-32: 32px;
+$height-40: 40px;
+$height-48: 48px;
+$height-56: 56px;
+$height-64: 64px;
+$height-100: 100px;
+
+$width100: 100%;
+$width-80: 80px;
+$width-100: 100px;
+$width-110: 110px;
+$width-120: 120px;
+$width-140: 140px;
+$width-240: 240px;
+$width-320: 320px;
+$width-576: 576px;
+
+
+// 设定导航栏信息
+$app-header-height: $height-64;
+$app-header-width: $height100;
+$app-footer-height: $height-48;
+$sider-width: 220px;
+
+
+
+
+
+
+// margin padding
+$padding-0: 0;
+$margin-8: 8px;
+$margin-16: 16px;
+$margin-24: 24px;
+$margin-32: 32px;
+
+$padding-0: 0;
+$padding-8: 8px;
+$padding-16: 16px;
+$padding-24: 24px;
+$padding-32: 32px;
+
+
+// Font Size
+$font-size-12: 12px;
+$font-size-14: 14px;
+$font-size-16: 16px;
+$font-size-18: 18px;
+$font-size-20: 20px;
+$font-size-24: 24px;
+$font-size-32: 32px;
+
+
+// Font Weight
+$font-weight-400: 400;
+$font-weight-500: 500;
+$font-weight-700: 700;
+$font-weight-900: 900;
+
+// border
+$border-1: 1px;
+$border-2: 2px;
+$border-3: 3px;
+$border-4: 4px;
+$border-5: 5px;
+$border-8: 8px;
+$border-10: 10px;
