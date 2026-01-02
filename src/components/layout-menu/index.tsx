@@ -32,6 +32,7 @@ const LayoutMenu: React.FC = () => {
         { key: 'hooks-usereducer', label: 'useReducer', icon: <ContainerOutlined /> },
         { key: 'hooks-useref', label: 'useRef', icon: <ContainerOutlined /> },
         { key: 'hooks-useeffect', label: 'useEffect', icon: <ContainerOutlined /> },
+        { key: 'hooks-forward-ref', label: 'forwardRef', icon: <ContainerOutlined /> },
       ],
     },
     {
