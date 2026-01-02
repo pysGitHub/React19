@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Layout, Menu, Button, type MenuProps } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, TeamOutlined, ToolOutlined, PieChartOutlined, DesktopOutlined, ContainerOutlined, MailOutlined, AppstoreOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { monitorScreenWidth } from '../../utils/screenUtil';
 import Global from '../../utils/global';
 import { Subscription } from 'rxjs';
@@ -47,7 +47,13 @@ const LayoutMenu: React.FC = () => {
   ];
 
   const navigate = useNavigate();
-
+  const location = useLocation();
+  useEffect(() => {
+    // 打印当前页面 URL（完整 URL 和路由 path）
+    console.log('当前路由 path:', location.pathname);
+    // 截取路由 path
+    setSubSelectedItem(location.pathname.split('/').at(-1) as string);
+  }, [location]);
   useEffect(() => {
     mobileLayoutRef.current = monitorScreenWidth(576).subscribe(isTrue => {
       setIsMobile(isTrue);
