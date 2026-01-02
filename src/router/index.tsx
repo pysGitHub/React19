@@ -3,16 +3,18 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const Login = lazy(() => import("../pages/login"));
 const Layout = lazy(() => import("../pages/layout"));
-const ConditionRender = lazy(() => import("../pages/base-data/condition-render"));
-const EventBinding = lazy(() => import("../pages/base-data/event-binding"));
-const HooksUseState = lazy(() => import("../pages/base-data/hooks-usestate"));
-const HooksUseRef = lazy(() => import("../pages/base-data/hooks-useref"));
-const HooksUseReducer = lazy(() => import("../pages/base-data/hooks-reducer"));
-const HooksUseEffect = lazy(() => import("../pages/base-data/hooks-useEffect"));
+const ConditionRender = lazy(() => import("../pages/base-data/default/condition-render"));
+const EventBinding = lazy(() => import("../pages/base-data/default/event-binding"));
+const HooksUseState = lazy(() => import("../pages/base-data/default/hooks-usestate"));
+const HooksUseRef = lazy(() => import("../pages/base-data/default/hooks-useref"));
+const HooksUseReducer = lazy(() => import("../pages/base-data/default/hooks-reducer"));
+const HooksUseEffect = lazy(() => import("../pages/base-data/default/hooks-useEffect"));
 const FatherToSon = lazy(() => import("../pages/base-data/component-pass-value/father-to-son"));
 const SonToFather = lazy(() => import("../pages/base-data/component-pass-value/son-to-father"));    
 const ContextPassValue = lazy(() => import("../pages/base-data/component-pass-value/context-pass-value"));
-
+const UseMemo = lazy(() => import("../pages/optimize-performance/use-memo"));
+const UseCallback = lazy(() => import("../pages/optimize-performance/use-callback"));
+const ReactMemo = lazy(() => import("../pages/optimize-performance/react-memo"));
 
 const router = createBrowserRouter([
     /**
@@ -44,6 +46,9 @@ const router = createBrowserRouter([
             { path: "father-to-son", element: <Suspense fallback={<div>Loading...</div>}><FatherToSon /></Suspense> },
             { path: "son-to-father", element: <Suspense fallback={<div>Loading...</div>}><SonToFather /></Suspense> },
             { path: "context-pass-value", element: <Suspense fallback={<div>Loading...</div>}><ContextPassValue /></Suspense>},
+            { path: "use-memo", element: <Suspense fallback={<div>Loading...</div>}><UseMemo /></Suspense>},
+            { path: "use-callback", element: <Suspense fallback={<div>Loading...</div>}><UseCallback /></Suspense>},
+            { path: "react-memo", element: <Suspense fallback={<div>Loading...</div>}><ReactMemo /></Suspense>},
             // {
             //     path: "hooks", element: <Suspense fallback={<div>Loading...</div>}><Hooks /></Suspense>,
             //     children: [

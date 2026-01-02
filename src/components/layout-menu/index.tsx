@@ -44,6 +44,16 @@ const LayoutMenu: React.FC = () => {
         { key: 'context-pass-value', label: '上下文传值' },
       ],
     },
+    {
+      key: 'optimize-performance',
+      label: '优化性能',
+      icon: <TeamOutlined />,
+      children: [
+        { key: 'use-memo', label: 'useMemo' },
+        { key: 'use-callback', label: 'useCallback' },
+        { key: 'react-memo', label: 'React.memo' },
+      ],
+    },
   ];
 
   const navigate = useNavigate();
@@ -106,14 +116,14 @@ const LayoutMenu: React.FC = () => {
     console.log(`Navigating to ${element.key}`, element);
     navigate(element.key);
   }, [navigate]);
- 
+
   const toggleCollapse = useCallback(() => {
     const newState = !isCollapsed;
     setIsCollapsed(newState);
     Global.setState('collapsed', newState);
   }, [isCollapsed]);
 
- 
+
   return (
     <section className="section">
       <Layout className="layout">
