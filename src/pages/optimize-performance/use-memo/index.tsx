@@ -16,8 +16,8 @@ const UseMemo:React.FC = () => {
     return result;
   };
 
-  // 使用了 useMemo 的昂贵计算函数
-  const expensiveCalculateWithMemo = useMemo(() => {
+  // 使用了 useMemo 的昂贵计算结果
+  const expensiveCalculateWithMemoResult = useMemo(() => {
     const startTime = Date.now();
     let result = 0;
     for (let i = 0; i < 100000000; i++) {
@@ -40,7 +40,7 @@ const UseMemo:React.FC = () => {
       <div>
         <p>Count: {count}</p>
         <p>Other State: {otherState}</p>
-        <p>昂贵计算结果 (使用 useMemo): {expensiveCalculateWithMemo}</p>
+        <p>昂贵计算结果 (使用 useMemo): {expensiveCalculateWithMemoResult}</p>
         <p>依赖项计算结果 (count * 2): {calculateWithDependencies}</p>
         <p>未使用 useMemo 的昂贵计算: {expensiveCalculateWithoutMemo()}</p>
         

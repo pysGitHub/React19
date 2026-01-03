@@ -15,7 +15,7 @@ const ContextPassValue = lazy(() => import("../pages/base-data/component-pass-va
 const UseMemo = lazy(() => import("../pages/optimize-performance/use-memo"));
 const UseCallback = lazy(() => import("../pages/optimize-performance/use-callback"));
 const ReactMemo = lazy(() => import("../pages/optimize-performance/react-memo"));
-const HooksForwardRef = lazy(() => import("../pages/base-data/forward-ref"));
+const HooksForwardRef = lazy(() => import("../pages/base-data/default/forward-ref"));
 
 const router = createBrowserRouter([
     /**
