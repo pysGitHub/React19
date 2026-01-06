@@ -17,7 +17,8 @@ const UseMemo = lazy(() => import("../pages/optimize-performance/use-memo"));
 const UseCallback = lazy(() => import("../pages/optimize-performance/use-callback"));
 const ReactMemo = lazy(() => import("../pages/optimize-performance/react-memo"));
 const HooksForwardRef = lazy(() => import("../pages/base-data/default/forward-ref"));
-
+const RouterDefault = lazy(() => import("../pages/base-data/router-introduce/router-default"));
+const RouterPassValue = lazy(() => import("../pages/base-data/router-introduce/router-pass-value"));
 const KanBan = lazy(() => import("../pages/kanban"));
 
 const router = createBrowserRouter([
@@ -35,7 +36,8 @@ const router = createBrowserRouter([
         element: <Suspense fallback={<div>Loading...</div>}><Login /></Suspense>,
     },
 
-    {path: "/kanban", 
+    {
+        path: "/kanban",
         element: <Suspense fallback={<div>Loading...</div>}><KanBan /></Suspense>
     },
     {
@@ -54,6 +56,8 @@ const router = createBrowserRouter([
             { path: "father-to-son", element: <Suspense fallback={<div>Loading...</div>}><FatherToSon /></Suspense> },
             { path: "son-to-father", element: <Suspense fallback={<div>Loading...</div>}><SonToFather /></Suspense> },
             { path: "context-pass-value", element: <Suspense fallback={<div>Loading...</div>}><ContextPassValue /></Suspense> },
+            { path: "router-default", element: <Suspense fallback={<div>Loading...</div>}><RouterDefault /></Suspense> },
+            { path: "router-pass-value", element: <Suspense fallback={<div>Loading...</div>}><RouterPassValue /></Suspense> },
             { path: "use-memo", element: <Suspense fallback={<div>Loading...</div>}><UseMemo /></Suspense> },
             { path: "use-callback", element: <Suspense fallback={<div>Loading...</div>}><UseCallback /></Suspense> },
             { path: "react-memo", element: <Suspense fallback={<div>Loading...</div>}><ReactMemo /></Suspense> },

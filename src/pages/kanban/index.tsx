@@ -33,6 +33,15 @@ const KanBan: React.FC = () => {
                     ],
                 },
                 {
+                    key: 'router',
+                    label: '路由简介',
+                    icon: 'PieChartOutlined',
+                    children: [
+                        { key: 'router-default', label: '路由设定' },
+                        { key: 'router-pass-value', label: '路由传值' },
+                    ],
+                },
+                {
                     key: 'optimize-performance',
                     label: '优化性能',
                     icon: 'TeamOutlined',
