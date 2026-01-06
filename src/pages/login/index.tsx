@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   // 当登录成功时跳转到/layout页面
   if (state.success) {
     setTimeout(() => {
-      navigate('/layout');
+      navigate('/kanban');
     }, 100);
   }
 

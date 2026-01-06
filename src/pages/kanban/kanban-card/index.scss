@@ -1,0 +1,57 @@
+@use '../../../css/common.scss' as *;
+
+.kanban-card {
+    display: flex;
+    flex-direction: column;
+    background-color: $primary-color1;
+    border: 1px solid $primary-color7;
+    border-radius: $border-8;
+    padding: $padding-24;
+    height: $height-100;
+    min-height: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        color: $primary-color7;
+        font-size: $font-size-18;
+        font-weight: $font-weight-500;
+        margin-bottom: $margin-16;
+        text-align: center;
+        width: 100%;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        text-align: center;
+
+        li {
+            margin: $margin-8 0;
+            color: $color-main-dark-lighter;
+            font-size: $font-size-14;
+            word-break: break-word;
+
+            &:first-child {
+                color: $color-main-gray;
+                font-size: $font-size-14;
+                margin-bottom: $margin-8;
+            }
+
+            &:last-child {
+                color: $primary-color9;
+                font-size: $font-size-12;
+                margin-top: $margin-8;
+            }
+        }
+    }
+}

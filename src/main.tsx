@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
 import './index.css'
 import './css/global.scss'  // 引入全局CSS样式文件
 
@@ -7,13 +8,16 @@ import './css/global.scss'  // 引入全局CSS样式文件
 
 import router from './router/index.tsx'
 import { RouterProvider } from 'react-router-dom'
+import { store } from './store/index.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 
+    // <RouterProvider router={router} />
 
 /*
 StrictMode 是 React 提供的一个开发工具，

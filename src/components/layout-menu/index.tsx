@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { Layout, Menu, Button, type MenuProps } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, TeamOutlined, ToolOutlined, PieChartOutlined, DesktopOutlined, ContainerOutlined, MailOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,8 +6,11 @@ import { monitorScreenWidth } from '../../utils/screenUtil';
 import Global from '../../utils/global';
 import { Subscription } from 'rxjs';
 import './index.scss';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 
 const { Sider } = Layout;
+export type MenuItem = Required<MenuProps>['items'][number];
 
 const LayoutMenu: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
@@ -16,49 +19,52 @@ const LayoutMenu: React.FC = () => {
   const [subSelectedItem, setSubSelectedItem] = useState<string>('condition-render');
   const [siderWidth, setSiderWidth] = useState<string>('220px');
   const [openKeys, setOpenKeys] = useState<string[]>([]);
-
   const mobileLayoutRef = useRef<Subscription | null>(null);
-  type MenuItem = Required<MenuProps>['items'][number];
+  const menuDataList  :any  = useSelector((state: RootState) => state.kanban.menuData)
 
-  const menuDaba: MenuItem[] = [
-    { key: 'condition-render', icon: <PieChartOutlined />, label: '条件渲染' },
-    { key: 'event-binding', icon: <DesktopOutlined />, label: '事件绑定' },
-    {
-      key: 'hooks',
-      label: 'Api Hooks',
-      icon: <MailOutlined />,
-      children: [
-        { key: 'hooks-usestate', label: 'useState', icon: <ContainerOutlined /> },
-        { key: 'hooks-usereducer', label: 'useReducer', icon: <ContainerOutlined /> },
-        { key: 'hooks-useref', label: 'useRef', icon: <ContainerOutlined /> },
-        { key: 'hooks-useeffect', label: 'useEffect', icon: <ContainerOutlined /> },
-        { key: 'hooks-forward-ref', label: 'forwardRef', icon: <ContainerOutlined /> },
-      ],
-    },
-    {
-      key: 'component-pass-value',
-      label: '组件传值',
-      icon: <AppstoreOutlined />,
-      children: [
-        { key: 'father-to-son', label: '父传子' },
-        { key: 'son-to-father', label: '子传父' },
-        { key: 'context-pass-value', label: '上下文传值' },
-      ],
-    },
-    {
-      key: 'optimize-performance',
-      label: '优化性能',
-      icon: <TeamOutlined />,
-      children: [
-        { key: 'use-memo', label: 'useMemo' },
-        { key: 'use-callback', label: 'useCallback' },
-        { key: 'react-memo', label: 'React.memo' },
-      ],
-    },
-  ];
+ console.log('-0---\n',menuDataList);
+
+
+
+
+  // 由于菜单项的 icon 组件无法通过navigate的state传值，所以采用key:value的映射关系
+  const icons: Record<string, React.ReactNode> = {
+    'MenuFoldOutlined': <MenuFoldOutlined />,
+    'MenuUnfoldOutlined': <MenuUnfoldOutlined />,
+    'UserOutlined': <UserOutlined />,
+    'TeamOutlined': <TeamOutlined />,
+    'ToolOutlined': <ToolOutlined />,
+    'PieChartOutlined': <PieChartOutlined />,
+    'DesktopOutlined': <DesktopOutlined />,
+    'ContainerOutlined': <ContainerOutlined />,
+    'MailOutlined': <MailOutlined />,
+    'AppstoreOutlined': <AppstoreOutlined />,
+  }
+
+ const menuData: MenuItem[] = useMemo(() => { 
+  // 从menuDataList中遍历icon，找到则替换成icons中的组件标签
+  return menuDataList.map((item: any) => {
+    const newItem = { ...item }; // 创建item的副本，避免直接修改原对象
+    if (item.icon && icons[item.icon]) {
+      newItem.icon = icons[item.icon];
+    }
+
+    if (item.children) {
+      newItem.children = item.children.map((child: any) => {
+        const newChild = { ...child }; // 创建child的副本，避免直接修改原对象
+        if (child.icon && icons[child.icon]) {
+          newChild.icon = icons[child.icon];
+        }
+        return newChild;
+      });
+    }
+    return newItem;
+  });
+ }, [menuDataList])
 
   const navigate = useNavigate();
   const location = useLocation();
+
   useEffect(() => {
     // 打印当前页面 URL（完整 URL 和路由 path）
     console.log('当前路由 path:', location.pathname);
@@ -142,7 +148,7 @@ const LayoutMenu: React.FC = () => {
             mode="inline"
             openKeys={openKeys}
             selectedKeys={[subSelectedItem]}
-            items={menuDaba}
+            items={menuData}
             onOpenChange={toggleMenu}
             onClick={navigateTo}
           >

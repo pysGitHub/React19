@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const Login = lazy(() => import("../pages/login"));
+
 const Layout = lazy(() => import("../pages/layout"));
 const ConditionRender = lazy(() => import("../pages/base-data/default/condition-render"));
 const EventBinding = lazy(() => import("../pages/base-data/default/event-binding"));
@@ -17,6 +18,8 @@ const UseCallback = lazy(() => import("../pages/optimize-performance/use-callbac
 const ReactMemo = lazy(() => import("../pages/optimize-performance/react-memo"));
 const HooksForwardRef = lazy(() => import("../pages/base-data/default/forward-ref"));
 
+const KanBan = lazy(() => import("../pages/kanban"));
+
 const router = createBrowserRouter([
     /**
      * fallback 是React的Suspense组件的一个属性，用于指定在等待懒加载组件加载期间显示的备用UI
@@ -30,7 +33,10 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Suspense fallback={<div>Loading...</div>}><Login /></Suspense>,
+    },
 
+    {path: "/kanban", 
+        element: <Suspense fallback={<div>Loading...</div>}><KanBan /></Suspense>
     },
     {
         path: "/layout",
