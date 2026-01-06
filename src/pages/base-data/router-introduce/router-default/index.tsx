@@ -14,11 +14,17 @@ const RouterDefault: React.FC = () => {
                 </div>
             </li>
             <li>
-                <h3>3. 修改 main.ts, 引入router中的配置文件 </h3>
+                <h3>3. 修改 main.tsx, 引入router中的配置文件 </h3>
                 <div className="m-16">
                     <div>
                         <img src="/images/base-image/router2.png" alt="" />
                     </div>
+                </div>
+            </li>
+             <li>
+                <h3>4. 跳转到默认组件，且浏览器地址显示路径</h3>
+                <div className="m-16">
+                    <img src="/images/base-image/router3.png" alt="" />
                 </div>
             </li>
         </ul>
