@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:qas": "vite --mode qas",
     "build": "tsc -b && vite build",
+    "build:qas": "tsc -b && vite build --mode qas",
     "lint": "eslint .",
     "preview": "vite preview"
   },
