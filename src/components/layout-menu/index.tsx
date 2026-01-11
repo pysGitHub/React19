@@ -22,8 +22,11 @@ const LayoutMenu: React.FC = () => {
   const mobileLayoutRef = useRef<Subscription | null>(null);
   const menuDataList  :any  = useSelector((state: RootState) => state.kanban.menuData)
 
- console.log('-0---\n',menuDataList);
-
+   // 使用 useRef 保存最新的 isMobile 值
+  const isMobileRef = useRef(isMobile);
+  useEffect(() => {
+    isMobileRef.current = isMobile;
+  }, [isMobile]);
 
 
 
@@ -121,6 +124,14 @@ const LayoutMenu: React.FC = () => {
   const navigateTo = useCallback((element: Parameters<NonNullable<MenuProps['onClick']>>[0]) => {
     setSubSelectedItem(element.key);
     console.log(`Navigating to ${element.key}`, element);
+
+
+    // 如果是手机模式，在点击了菜单项后，设置isMobile&clicked为true
+    if(isMobileRef.current) {
+      Global.setState('isMobile&clicked', true);
+    }
+
+
     navigate(element.key);
   }, [navigate]);
 

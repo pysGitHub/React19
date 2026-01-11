@@ -10,7 +10,7 @@ const { Option } = Select;
 
 const LayoutHeader = () => {
   const global = useGlobal();
-  
+
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [hiddenBreadCrumbContent, setHiddenBreadCrumbContent] = useState<boolean>(false);
@@ -60,6 +60,25 @@ const LayoutHeader = () => {
     global.setState('collapsed', newCollapsed);
   };
 
+
+  useEffect(() => {
+    // 手机屏menu被点击时，执行toggleCollapse
+    const isMobileCkicked$ = global.getState<boolean>('isMobile&clicked').subscribe((state: boolean) => {
+      console.log('isMobile&clicked 状态:', state, 'isMobile:', global.getState('isMobile'));
+      if (state) {
+        toggleCollapse();
+        global.setState('isMobile&clicked', false);
+      }
+    });
+    global.addSubscription('isMobile&clicked', isMobileCkicked$);
+
+    // 清理函数
+    return () => {
+      // isMobileCkicked$.unsubscribe();
+      global.unsubscribeByKey('isMobile&clicked');
+    };
+  }, [global]);
+
   return (
     <>
       {!isMobile && (
@@ -104,7 +123,7 @@ const LayoutHeader = () => {
         <header className={`app-header ${isMobile ? 'mobile-header' : ''}`}>
           <div className="mobile-content">React19 Demo</div>
           <span  // NOSONAR
-            className="trigger" 
+            className="trigger"
             onClick={toggleCollapse}
           >
             {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
