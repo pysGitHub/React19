@@ -5,12 +5,13 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import api from '../../axios/api';
 import './index.scss';
 
-interface userInfo {
+interface UserInfo {
   code: number,
   message: string,
   permissions: string,
   success: boolean,
-  token: string
+  token: string,
+  refresh_token: string
 }
 
 interface LoginFormValues {
@@ -27,11 +28,12 @@ const Login: React.FC = () => {
     setLoading(true);
 
     try {
-      const response: userInfo = await api.post('/login', values);
+      const response: UserInfo = await api.post('/login', values);
 
       if (response.code === 200 && response.success) {
         // 存储token到localStorage
-        localStorage.setItem('access_token', response.token);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('refresh_token', response.refresh_token);
 
         // 成功提示
         apiMessage.open({

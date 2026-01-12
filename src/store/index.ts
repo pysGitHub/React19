@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import kanbanReducer from "./modules/kanban";
+import booksReducer from "./modules/books";
 
 export const store = configureStore({
     reducer: {
-        kanban: kanbanReducer
+        kanban: kanbanReducer,
+        books: booksReducer
     } 
 });
 

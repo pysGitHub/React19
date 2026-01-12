@@ -30,6 +30,7 @@ const KanBan: React.FC = () => {
                         { key: 'father-to-son', label: '父传子' },
                         { key: 'son-to-father', label: '子传父' },
                         { key: 'context-pass-value', label: '上下文传值' },
+                        { key: 'redux-books', label: 'Redux传值' },
                     ],
                 },
                 {

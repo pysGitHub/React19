@@ -34,7 +34,7 @@ instance.interceptors.request.use(
             return config;
         }
 
-        const token = localStorage.getItem('access_token');
+        const token = localStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -88,26 +88,26 @@ const handleTokenRefresh = async (originalRequest: InternalAxiosRequestConfig & 
                 }
             });
 
-            const { access_token, refresh_token: newRefreshToken } = response.data;
+            const { token, refresh_token: newRefreshToken } = response.data;
 
             // 更新本地存储中的token
-            localStorage.setItem('access_token', access_token);
+            localStorage.setItem('token', token);
             if (newRefreshToken) {
                 localStorage.setItem('refresh_token', newRefreshToken);
             }
 
             // 更新原始请求的header
-            originalRequest.headers.Authorization = `Bearer ${access_token}`;
+            originalRequest.headers.Authorization = `Bearer ${token}`;
 
             // 处理等待队列中的请求
-            processQueue(null, access_token);
+            processQueue(null, token);
 
             // 重新发起原始请求
             return instance(originalRequest);
         } catch (refreshError) {
             // 刷新失败，清空所有token并跳转到登录页
             processQueue(refreshError, null);
-            localStorage.removeItem('access_token');
+            localStorage.removeItem('token');
             localStorage.removeItem('refresh_token');
 
             // 跳转到登录页面或执行其他操作
