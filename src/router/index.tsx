@@ -35,6 +35,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Suspense fallback={<div>Loading...</div>}><Login /></Suspense>,
     },
+    {
+        path: "/login",
+        element: <Suspense fallback={<div>Loading...</div>}><Login /></Suspense>,
+    },
 
     {
         path: "/kanban",

@@ -1,103 +1,111 @@
-import { useActionState, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFormStatus } from 'react-dom';
-import './index.scss'
+import { Form, Input, Button, Space, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import api from '../../axios/api';
+import './index.scss';
 
-
-// 定义登录动作函数
-async function loginAction(_: any, formData: FormData) {
-  const username = formData.get('username') as string;
-  const password = formData.get('password') as string;
-
-  // 用户名不区分大小写比较
-  if (username.toLowerCase() === 'thomas_pan' && password === '112233') {
-    return { success: true, error: null };
-  } else {
-    return { success: false, error: '用户名或密码错误' };
-  }
+interface userInfo {
+  code: number,
+  message: string,
+  permissions: string,
+  success: boolean,
+  token: string
 }
 
-// 提交按钮组件，使用useFormStatus获取表单状态
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="submitButton"
-    >
-      {pending ? '登录中...' : '登录'}
-    </button>
-  );
+interface LoginFormValues {
+  username: string;
+  password: string;
 }
 
 const Login: React.FC = () => {
-  const [state, formAction, isPending] = useActionState(loginAction, { success: false, error: null });
-  const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [apiMessage, contextHolder] = message.useMessage();
   const navigate = useNavigate();
 
-  // 当登录成功时跳转到/layout页面
-  if (state.success) {
-    setTimeout(() => {
-      navigate('/kanban');
-    }, 100);
-  }
+  const onFinish = async (values: LoginFormValues) => {
+    setLoading(true);
 
-  // 显示错误信息时的处理
-  if (state.error && !showError) {
-    setShowError(true);
-    setTimeout(() => {
-      setShowError(false);
-    }, 3000); // 3秒后隐藏错误信息
-  }
+    try {
+      const response: userInfo = await api.post('/login', values);
+
+      if (response.code === 200 && response.success) {
+        // 存储token到localStorage
+        localStorage.setItem('access_token', response.token);
+
+        // 成功提示
+        apiMessage.open({
+          type: 'success',
+          content: '登录成功！',
+        });
+
+        // 延迟跳转到看板页面
+        setTimeout(() => {
+          navigate('/kanban');
+        }, 1000);
+      } else {
+        // 登录失败，显示错误信息
+        apiMessage.open({
+          type: 'error',
+          content: response.message || '用户名或密码错误',
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div
-      className='bgView'
-    >
-      <div
-        className='bgContent'
-      >
-        <h1
-          className='title'
-        >用户登录</h1>
+    <div className='bgView'>
+      <div className='bgContent'>
+        {contextHolder}
+        <h1 className='title'>用户登录</h1>
 
-        {showError && state.error && (
-          <div
-            className='errMsg'
+        <Form
+          name="login_form"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
+          layout="vertical"
+        >
+          <Form.Item
+            label="用户名"
+            name="username"
+            rules={[{ required: true, message: '请输入用户名!' }]}
           >
-            {state.error}
-          </div>
-        )}
-
-        <form action={formAction}>
-          <div className='userName'>
-            <label htmlFor="username">
-              用户名:
-            </label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              required
+            <Input
+              prefix={<UserOutlined />}
+              placeholder="请输入用户名"
+              size="large"
             />
-          </div>
+          </Form.Item>
 
-          <div className='password'>
-            <label htmlFor="password">
-              密码:
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
+          <Form.Item
+            label="密码"
+            name="password"
+            rules={[{ required: true, message: '请输入密码!' }]}
+          >
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="请输入密码"
+              size="large"
             />
-          </div>
+          </Form.Item>
 
-          <SubmitButton />
-        </form>
+          <Form.Item>
+            <Space style={{ width: '100%', flexDirection: 'column' }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                loading={loading}
+                block
+              >
+                登录
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );
