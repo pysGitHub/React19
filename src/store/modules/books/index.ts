@@ -8,9 +8,20 @@ interface ApiResponse {
     success: boolean
 }
 
-interface Book {
-    response: ApiResponse;
-    loading: boolean;
+// 定义每个数据类型的状态接口
+interface BookData {
+    booksList: {
+        response: ApiResponse;
+        loading: boolean;
+    };
+    bookDetail: {
+        response: ApiResponse;
+        loading: boolean;
+    };
+    allBooks: {
+        response: ApiResponse;
+        loading: boolean;
+    };
 }
 
 // 获取所有书名
@@ -52,64 +63,82 @@ export const fetchAllBooks = createAsyncThunk(
   }
 );
 
-const initialState: Book = {
-  response: {
-    code: 0,
-    data: [],
-    message: '',
-    success: true
+const initialState: BookData = {
+  booksList: {
+    response: {
+      code: 0,
+      data: [],
+      message: '',
+      success: true
+    },
+    loading: false,
   },
-  loading: false,
-} as Book;
+  bookDetail: {
+    response: {
+      code: 0,
+      data: [],
+      message: '',
+      success: true
+    },
+    loading: false,
+  },
+  allBooks: {
+    response: {
+      code: 0,
+      data: [],
+      message: '',
+      success: true
+    },
+    loading: false,
+  }
+};
 
 const booksSlice = createSlice({
   name: "books",
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       // 处理获取所有书名
       .addCase(fetchBooks.pending, (state) => {
-        state.loading = true;
+        state.booksList.loading = true;
       })
       .addCase(fetchBooks.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.response = payload;
+        state.booksList.loading = false;
+        state.booksList.response = payload;
       })
       .addCase(fetchBooks.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.response.message = payload as string;
-        state.response.success = false;
+        state.booksList.loading = false;
+        state.booksList.response.message = payload as string;
+        state.booksList.response.success = false;
       })
       
       // 处理获取某本书的详细信息
       .addCase(fetchBookDetail.pending, (state) => {
-        state.loading = true;
+        state.bookDetail.loading = true;
       })
       .addCase(fetchBookDetail.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.response = payload;
+        state.bookDetail.loading = false;
+        state.bookDetail.response = payload;
       })
       .addCase(fetchBookDetail.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.response.message = payload as string;
-        state.response.success = false;
+        state.bookDetail.loading = false;
+        state.bookDetail.response.message = payload as string;
+        state.bookDetail.response.success = false;
       })
       
       // 处理获取所有书本数据
       .addCase(fetchAllBooks.pending, (state) => {
-        state.loading = true;
+        state.allBooks.loading = true;
       })
       .addCase(fetchAllBooks.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.response = payload;
+        state.allBooks.loading = false;
+        state.allBooks.response = payload;
       })
       .addCase(fetchAllBooks.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.response.message = payload as string;
-        state.response.success = false;
+        state.allBooks.loading = false;
+        state.allBooks.response.message = payload as string;
+        state.allBooks.response.success = false;
       });
   }
 });
