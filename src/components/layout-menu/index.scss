@@ -26,7 +26,7 @@
             * 注意：修改了Menu组件的第二级标签，审查出来的类为： 
             * class="ant-menu ant-menu-sub ant-menu-inline"
             * 但是在改写的时候需要将名称连接起来，中间无空格，否则无法修改样式
-            */ 
+            */
             .ant-menu.ant-menu-sub.ant-menu-inline {
                 background-color: $primary-color10;
             }
@@ -64,4 +64,13 @@
     background-color: $Secondary-color10 !important;
     color: $Attention-color !important;
     border-left: $border-2 solid $Secondary-color !important;
+}
+
+
+.menuHidden {
+    // .css-var-root.ant-tooltip-css-var 这个div是antd的tooltip组件的样式，
+    // 直接添加到了body标签下的，用于显示提示信息，这里隐藏掉
+    .css-var-root.ant-tooltip-css-var {
+        display: none;
+    }
 }

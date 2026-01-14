@@ -28,7 +28,19 @@ const LayoutMenu: React.FC = () => {
     isMobileRef.current = isMobile;
   }, [isMobile]);
 
-
+  // 添加effect处理body类名，以防止移动端菜单显示问题
+  useEffect(() => {
+    if (isMobileRef.current) {
+      document.body.classList.add('menuHidden');
+    } else {
+      document.body.classList.remove('menuHidden');
+    }
+    
+    // 清理函数
+    return () => {
+      document.body.classList.remove('menuHidden');
+    };
+  }, [isMobileRef.current]);
 
   // 由于菜单项的 icon 组件无法通过navigate的state传值，所以采用key:value的映射关系
   const icons: Record<string, React.ReactNode> = {
