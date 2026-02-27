@@ -1,18 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Space, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import api from '../../axios/api';
+import { fetchUserInfo, initializeState } from '../../store/modules/user-info';
+import { useAppDispatch, useAppSelector, type RootState } from '../../store';
 import './index.scss';
-
-interface UserInfo {
-  code: number,
-  message: string,
-  permissions: string,
-  success: boolean,
-  token: string,
-  refresh_token: string
-}
 
 interface LoginFormValues {
   username: string;
@@ -20,16 +12,15 @@ interface LoginFormValues {
 }
 
 const Login: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [apiMessage, contextHolder] = message.useMessage();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [apiMessage, contextHolder] = message.useMessage();
+  
+  const { response, loading } = useAppSelector((state: RootState) => state.userInfo);
 
-  const onFinish = async (values: LoginFormValues) => {
-    setLoading(true);
-
-    try {
-      const response: UserInfo = await api.post('/login', values);
-
+  // 监听登录结果并进行相应处理
+  useEffect(() => {
+    if (response) {
       if (response.code === 200 && response.success) {
         // 存储token到localStorage
         localStorage.setItem('token', response.token);
@@ -52,10 +43,18 @@ const Login: React.FC = () => {
           content: response.message || '用户名或密码错误',
         });
       }
-    } finally {
-      setLoading(false);
     }
+  }, [response]);
+
+  const onFinish = async (values: LoginFormValues) => {
+    // 使用 Redux action 发起登录请求
+    dispatch(fetchUserInfo(values));
   };
+
+  // 重置状态
+  useEffect(() => {
+    dispatch(initializeState());
+  }, [dispatch]);
 
   return (
     <div className='bgView'>
@@ -99,9 +98,8 @@ const Login: React.FC = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                size="large"
                 loading={loading}
-                block
+                style={{ width: '100%' }}
               >
                 登录
               </Button>

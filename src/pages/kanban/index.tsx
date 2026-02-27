@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import KanbanCard, { type KanbanCardProps } from './kanban-card';
 import { Row, Col } from 'antd';
 import type { MenuItem } from '../../components/layout-menu';
+import ComponentQueryExample from '../component-query-example';
 
 const KanBan: React.FC = () => {
 
@@ -107,6 +108,8 @@ const KanBan: React.FC = () => {
                     {kanbanCardList}
                 </Row>
             </section>
+
+        <ComponentQueryExample />
         </>
     )
 }

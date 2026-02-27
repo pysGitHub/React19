@@ -40,15 +40,46 @@ export const fetchBooks = createAsyncThunk(
 // 获取某本书的详细信息
 export const fetchBookDetail = createAsyncThunk(
   'books/fetchBookDetail',
-  async (name: string, { rejectWithValue }) => {
+  async ({name, price}: {name: string, price?: number}, { rejectWithValue }) => {
     try {
-      const response: ApiResponse = await api.post('/bookDetail', { name });
+      const response: ApiResponse = await api.post('/bookDetail', { name, price });
       return response;
     } catch (error: any) {
       return rejectWithValue(error.message || '获取书籍详情失败');
     }
   }
 );
+
+
+
+
+
+// // 获取某本书的详细信息
+// // 定义请求参数接口
+// interface FetchBookDetailParams {
+//   name: string;
+//   price?: number;
+// }
+
+// export const fetchBookDetail = createAsyncThunk(
+//   'books/fetchBookDetail',
+//   async (params: FetchBookDetailParams, { rejectWithValue }) => {
+//     try {
+//       const response: ApiResponse = await api.post('/bookDetail', params);
+//       return response;
+//     } catch (error: any) {
+//       return rejectWithValue(error.message || '获取书籍详情失败');
+//     }
+//   }
+// );
+
+
+
+
+
+
+
+
 
 // 获取所有书本数据
 export const fetchAllBooks = createAsyncThunk(
@@ -96,7 +127,12 @@ const initialState: BookData = {
 const booksSlice = createSlice({
   name: "books",
   initialState,
-  reducers: {},
+  reducers: {
+    // 初始化状态的方法
+    initializeState: (state) => {
+      Object.assign(state, initialState);
+    }
+  },
   extraReducers: (builder) => {
     builder
       // 处理获取所有书名
@@ -142,5 +178,7 @@ const booksSlice = createSlice({
       });
   }
 });
+
+export const { initializeState } = booksSlice.actions;
 
 export default booksSlice.reducer;

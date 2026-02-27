@@ -27,7 +27,7 @@ const Books: React.FC = () => {
   // 获取特定书籍详情
   const handleFetchBookDetail = () => {
     if (selectedBook) {
-      dispatch(fetchBookDetail(selectedBook));
+      dispatch(fetchBookDetail({name: selectedBook}));
     }
   };
 
