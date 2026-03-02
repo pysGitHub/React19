@@ -5,52 +5,22 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 const Login = lazy(() => import("../pages/login"));
 
 const Layout = lazy(() => import("../pages/layout"));
-const ConditionRender = lazy(
-  () => import("../pages/base-data/default/condition-render"),
-);
-const EventBinding = lazy(
-  () => import("../pages/base-data/default/event-binding"),
-);
-const HooksUseState = lazy(
-  () => import("../pages/base-data/default/hooks-usestate"),
-);
-const HooksUseRef = lazy(
-  () => import("../pages/base-data/default/hooks-useref"),
-);
-const HooksUseReducer = lazy(
-  () => import("../pages/base-data/default/hooks-reducer"),
-);
-const HooksUseEffect = lazy(
-  () => import("../pages/base-data/default/hooks-useEffect"),
-);
-const FatherToSon = lazy(
-  () => import("../pages/base-data/component-pass-value/father-to-son"),
-);
-const SonToFather = lazy(
-  () => import("../pages/base-data/component-pass-value/son-to-father"),
-);
-const ContextPassValue = lazy(
-  () => import("../pages/base-data/component-pass-value/context-pass-value"),
-);
-const Books = lazy(
-  () => import("../pages/base-data/component-pass-value/redux/books"),
-);
+const ConditionRender = lazy(() => import("../pages/base-data/default/condition-render"));
+const EventBinding = lazy(() => import("../pages/base-data/default/event-binding"));
+const HooksUseState = lazy(() => import("../pages/base-data/default/hooks-usestate"));
+const HooksUseRef = lazy(() => import("../pages/base-data/default/hooks-useref"));
+const HooksUseReducer = lazy(() => import("../pages/base-data/default/hooks-reducer"));
+const HooksUseEffect = lazy(() => import("../pages/base-data/default/hooks-useEffect"));
+const FatherToSon = lazy(() => import("../pages/base-data/component-pass-value/father-to-son"));
+const SonToFather = lazy(() => import("../pages/base-data/component-pass-value/son-to-father"));
+const ContextPassValue = lazy(() => import("../pages/base-data/component-pass-value/context-pass-value"));
+const Books = lazy(() => import("../pages/base-data/component-pass-value/redux/books"));
 const UseMemo = lazy(() => import("../pages/optimize-performance/use-memo"));
-const UseCallback = lazy(
-  () => import("../pages/optimize-performance/use-callback"),
-);
-const ReactMemo = lazy(
-  () => import("../pages/optimize-performance/react-memo"),
-);
-const HooksForwardRef = lazy(
-  () => import("../pages/base-data/default/forward-ref"),
-);
-const RouterDefault = lazy(
-  () => import("../pages/base-data/router-introduce/router-default"),
-);
-const RouterPassValue = lazy(
-  () => import("../pages/base-data/router-introduce/router-pass-value"),
-);
+const UseCallback = lazy(() => import("../pages/optimize-performance/use-callback"));
+const ReactMemo = lazy(() => import("../pages/optimize-performance/react-memo"));
+const HooksForwardRef = lazy(() => import("../pages/base-data/default/forward-ref"));
+const RouterDefault = lazy(() => import("../pages/base-data/router-introduce/router-default"));
+const RouterPassValue = lazy(() => import("../pages/base-data/router-introduce/router-pass-value"));
 const KanBan = lazy(() => import("../pages/kanban"));
 
 function lazySuspense(reactNode: React.ReactNode) {
