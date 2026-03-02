@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import './index.scss'
-import { lazy, useState, useEffect } from 'react';
+import { lazy, useState, useEffect, useRef } from 'react';
 import { Content } from 'antd/es/layout/layout';
 import { Outlet } from 'react-router-dom';
 import { monitorScreenWidth } from '../../utils/screenUtil';
@@ -11,16 +11,16 @@ const LayoutMenu = lazy(() => import('../../components/layout-menu'));
 const LayoutFooter = lazy(() => import('../../components/layout-footer'));
 const LayoutPage:React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
-  let subscription: Subscription | null = null;
+  const subscriptionRef = useRef<Subscription | null>(null);
 
   useEffect(() => {
-    subscription = monitorScreenWidth(576).subscribe((mobile: boolean) => {
+    subscriptionRef.current = monitorScreenWidth(576).subscribe((mobile: boolean) => {
       setIsMobile(mobile);
     });
  
     return () => {
-      if (subscription) {
-        subscription.unsubscribe();
+      if (subscriptionRef.current) {
+        subscriptionRef.current.unsubscribe();
       }
     };
   }, []);
