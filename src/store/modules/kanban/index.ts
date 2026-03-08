@@ -4,11 +4,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const KanbanData = createSlice({ 
     name: "kanbanData",
     initialState: {
-        menuData: (
-            localStorage.getItem('menuData') ? 
-            JSON.parse(localStorage.getItem('menuData') as string) : 
-            []
-        ),
+        menuData: (() => {
+            const storedData = localStorage.getItem('menuData');
+            if (storedData && storedData !== 'undefined' && storedData !== 'null') {
+                try {
+                    return JSON.parse(storedData);
+                } catch (e) {
+                    console.error('Failed to parse menuData from localStorage:', e);
+                    localStorage.removeItem('menuData');
+                    return [];
+                }
+            }
+            return [];
+        })(),
     },
     reducers: {
         setKanbanData: (state, action) => {

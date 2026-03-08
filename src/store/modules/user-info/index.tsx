@@ -9,7 +9,8 @@ interface ApiResponse {
     token: string,
     refresh_token: string,
     success: boolean,
-    permissions: string
+    permissions: string,
+    [key: string]: unknown,
 }
 
 interface UserResponse {
